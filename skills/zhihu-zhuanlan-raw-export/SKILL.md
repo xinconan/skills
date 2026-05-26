@@ -62,7 +62,14 @@ node .\skills\zhihu-zhuanlan-raw-export\scripts\export-zhihu-zhuanlan.mjs `
   --output-dir $outputDir `
   --base "optional-output-name"
 ```
-4. Delete the temporary response artifact after a successful export:
+4. Run the Markdown link unwrapping script so `https://link.zhihu.com/?target=...` links are rewritten to their decoded target URLs:
+
+```powershell
+node .\skills\zhihu-zhuanlan-raw-export\scripts\unwrap-zhihu-redirect-links.mjs `
+  --input .\output-name.md
+```
+
+5. Delete the temporary response artifact after a successful export:
 
 ```powershell
 Remove-Item -LiteralPath .\tmp-zhihu-response.json -ErrorAction SilentlyContinue
@@ -99,6 +106,19 @@ The script always produces:
 - `<base>.html`
 - `<base>.md`
 
+## Markdown Link Unwrapping Script
+
+`unwrap-zhihu-redirect-links.mjs` accepts:
+
+- `--input <path>`: Required. Path to the Markdown file to update in place.
+
+The script:
+
+- scans the Markdown for `https://link.zhihu.com/?target=...` URLs
+- decodes the `target` parameter with proper URL decoding
+- rewrites matching links in place as UTF-8 text
+- leaves non-matching or invalid redirect URLs unchanged
+
 ## Filename Rules
 
 When `--base` is omitted:
@@ -121,6 +141,8 @@ Quick checks:
 ```powershell
 rg "_1440w\.gif|_b\.jpg" .\output-name.html
 rg "_1440w\.gif|_b\.jpg" .\output-name.md
+rg "https://link\.zhihu\.com/\?target=|https://juejin\.cn|https://codepen\.io" .\output-name.md
 ```
 
 If `_b.jpg` appears where a GIF should exist, the workflow likely fell back to DOM-rendered content and should be redone from the original response body.
+If `https://link.zhihu.com/?target=` still appears in the Markdown for links that should have been unwrapped, rerun the link unwrapping script on the generated `.md` file.
