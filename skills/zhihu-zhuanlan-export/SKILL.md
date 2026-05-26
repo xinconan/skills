@@ -1,5 +1,5 @@
 ---
-name: zhihu-zhuanlan-raw-export
+name: zhihu-zhuanlan-export
 description: Use when exporting a Zhihu Zhuanlan article (`https://zhuanlan.zhihu.com/p/...`) to HTML and Markdown while preserving original image and GIF URLs. Use for requests to save article正文, convert a Zhihu专栏 article to Markdown, or avoid DOM-rendered preview images by extracting data strictly from the original page response body.
 ---
 
@@ -57,7 +57,7 @@ Use this sequence instead:
 
 ```powershell
 $outputDir = (Get-Location).Path
-node .\skills\zhihu-zhuanlan-raw-export\scripts\export-zhihu-zhuanlan.mjs `
+node .\skills\zhihu-zhuanlan-export\scripts\export-zhihu-zhuanlan.mjs `
   --input .\tmp-zhihu-response.json `
   --output-dir $outputDir `
   --base "optional-output-name"
@@ -65,7 +65,7 @@ node .\skills\zhihu-zhuanlan-raw-export\scripts\export-zhihu-zhuanlan.mjs `
 4. Run the Markdown link unwrapping script so `https://link.zhihu.com/?target=...` links are rewritten to their decoded target URLs:
 
 ```powershell
-node .\skills\zhihu-zhuanlan-raw-export\scripts\unwrap-zhihu-redirect-links.mjs `
+node .\skills\zhihu-zhuanlan-export\scripts\unwrap-zhihu-redirect-links.mjs `
   --input .\output-name.md
 ```
 

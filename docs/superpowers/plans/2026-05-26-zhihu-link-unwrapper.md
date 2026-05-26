@@ -13,8 +13,8 @@
 ### Task 1: Define Regression Tests for Link Unwrapping
 
 **Files:**
-- Create: `skills/zhihu-zhuanlan-raw-export/scripts/unwrap-zhihu-redirect-links.test.mjs`
-- Test: `skills/zhihu-zhuanlan-raw-export/scripts/unwrap-zhihu-redirect-links.test.mjs`
+- Create: `skills/zhihu-zhuanlan-export/scripts/unwrap-zhihu-redirect-links.test.mjs`
+- Test: `skills/zhihu-zhuanlan-export/scripts/unwrap-zhihu-redirect-links.test.mjs`
 
 - [ ] **Step 1: Write the failing test**
 
@@ -25,15 +25,15 @@ Add tests for:
 
 - [ ] **Step 2: Run test to verify it fails**
 
-Run: `node --test .\skills\zhihu-zhuanlan-raw-export\scripts\unwrap-zhihu-redirect-links.test.mjs`
+Run: `node --test .\skills\zhihu-zhuanlan-export\scripts\unwrap-zhihu-redirect-links.test.mjs`
 Expected: FAIL because the script module does not exist yet.
 
 ### Task 2: Implement Standalone CLI Script
 
 **Files:**
-- Create: `skills/zhihu-zhuanlan-raw-export/scripts/unwrap-zhihu-redirect-links.mjs`
-- Modify: `skills/zhihu-zhuanlan-raw-export/scripts/unwrap-zhihu-redirect-links.test.mjs`
-- Test: `skills/zhihu-zhuanlan-raw-export/scripts/unwrap-zhihu-redirect-links.test.mjs`
+- Create: `skills/zhihu-zhuanlan-export/scripts/unwrap-zhihu-redirect-links.mjs`
+- Modify: `skills/zhihu-zhuanlan-export/scripts/unwrap-zhihu-redirect-links.test.mjs`
+- Test: `skills/zhihu-zhuanlan-export/scripts/unwrap-zhihu-redirect-links.test.mjs`
 
 - [ ] **Step 1: Write minimal implementation**
 
@@ -44,13 +44,13 @@ Implement:
 
 - [ ] **Step 2: Run test to verify it passes**
 
-Run: `node --test .\skills\zhihu-zhuanlan-raw-export\scripts\unwrap-zhihu-redirect-links.test.mjs`
+Run: `node --test .\skills\zhihu-zhuanlan-export\scripts\unwrap-zhihu-redirect-links.test.mjs`
 Expected: PASS
 
 ### Task 3: Update Skill Workflow
 
 **Files:**
-- Modify: `skills/zhihu-zhuanlan-raw-export\SKILL.md`
+- Modify: `skills/zhihu-zhuanlan-export\SKILL.md`
 
 - [ ] **Step 1: Document the post-processing step**
 
@@ -58,7 +58,7 @@ Update the workflow and command examples so the skill instructs users to run the
 
 - [ ] **Step 2: Verify the doc references the new script correctly**
 
-Run: `rg -n "unwrap-zhihu-redirect-links|target=" .\skills\zhihu-zhuanlan-raw-export\SKILL.md`
+Run: `rg -n "unwrap-zhihu-redirect-links|target=" .\skills\zhihu-zhuanlan-export\SKILL.md`
 Expected: output includes the new script invocation and validation guidance.
 
 ### Task 4: Verify End-to-End Behavior
@@ -68,7 +68,7 @@ Expected: output includes the new script invocation and validation guidance.
 
 - [ ] **Step 1: Run the standalone script on the exported Markdown**
 
-Run: `node .\skills\zhihu-zhuanlan-raw-export\scripts\unwrap-zhihu-redirect-links.mjs --input ".\CSS 技巧：如何在 clamp() 中使用 auto 值.md"`
+Run: `node .\skills\zhihu-zhuanlan-export\scripts\unwrap-zhihu-redirect-links.mjs --input ".\CSS 技巧：如何在 clamp() 中使用 auto 值.md"`
 Expected: file is updated in place and script reports replacement count.
 
 - [ ] **Step 2: Verify decoded links exist in the sample file**
